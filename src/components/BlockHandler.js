@@ -35,7 +35,7 @@ class BlockHandler extends React.Component {
 						<DragHandle />
 						<button
 							index={this.props.index}
-							onClick={() => this.props.handleDeleteBlock(this.props.index)}
+							onClick={() => this.props.handleDelete(this.props.index)}
 						>
 							*
 						</button>

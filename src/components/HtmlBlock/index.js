@@ -1,6 +1,6 @@
 import React from 'react'
 import {Editor, EditorState} from 'draft-js'
-import './HtmlBlock.css'
+import './index.css'
 
 class HtmlBlock extends React.Component {
   constructor(props) {

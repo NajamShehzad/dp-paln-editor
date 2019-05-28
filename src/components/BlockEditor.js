@@ -5,12 +5,12 @@ import {
 } from 'react-sortable-hoc'
 import arrayMove from 'array-move'
 import { Input } from 'antd';
-import 'antd/lib/input/style';
+import 'antd/lib/input/style/index.css';
 
 import BlockHandler from './BlockHandler'
-import HeadingBlock from './HeadingBlock'
-import HtmlBlock from './HtmlBlock'
-import ImageBlock from './ImageBlock'
+import HeadingBlock from './HeadingBlock/'
+import HtmlBlock from './HtmlBlock/'
+import ImageBlock from './ImageBlock/'
 import BLOCK_TYPE from './BlockType'
 import PopupMenu from './PopupMenu'
 import './BlockEditor.css'
@@ -18,7 +18,6 @@ import './BlockEditor.css'
 const DragableBlock = sortableElement(({index, type, content, handleDelete, handleClickMenu, handleContentChange}) => {
   switch (type) {
     case BLOCK_TYPE.HEADING:
-      // console.log(content);
       return (
         <div>
           <HeadingBlock
@@ -27,7 +26,7 @@ const DragableBlock = sortableElement(({index, type, content, handleDelete, hand
             content={content}
             handleContentChange={handleContentChange}
           />
-          <BlockHandler index={index} handleDeleteBlock={handleDelete} />
+          <BlockHandler index={index} handleDelete={handleDelete} />
           <PopupMenu index={index} onClickMenu={handleClickMenu} />
         </div>
       )
@@ -42,14 +41,14 @@ const DragableBlock = sortableElement(({index, type, content, handleDelete, hand
           <PopupMenu index={index} onClickMenu={handleClickMenu} />
         </div>
       )
-    // case BLOCK_TYPE.IMAGE:
-    //   return (
-    //     <div>
-    //       <ImageBlock type={blockType} handleBlockContent={handleBlockContent} />
-    //       <BlockHandler index={index} handleDeleteBlock={handleDeleteBlock} />
-    //       <PopupMenu index={index} onClickMenu={handleClickMenu} />
-    //     </div>
-    //   )
+    case BLOCK_TYPE.IMAGE:
+      return (
+        <div>
+          <ImageBlock type={type} />
+          <BlockHandler index={index} handleDelete={handleDelete} />
+          <PopupMenu index={index} onClickMenu={handleClickMenu} />
+        </div>
+      )
     default:
       break;
   }
