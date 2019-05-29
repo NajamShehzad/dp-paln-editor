@@ -1,5 +1,6 @@
 import React from "react";
 import Dropzone from "react-dropzone";
+import { Icon } from 'antd'
 
 // for profile picture
 class ImageUpload extends React.Component {
@@ -30,7 +31,8 @@ class ImageUpload extends React.Component {
     const { files } = this.props;
     const thumbsContainer = {
       width: "100%",
-      objectPosition: "center"
+      objectPosition: "center",
+      alignItem: "center",
     };
 
     const thumbs = files.map((file, key) => (
@@ -46,7 +48,7 @@ class ImageUpload extends React.Component {
             width: "150px",
             height: "150px",
             objectPosition: "center",
-            border: " 1px dashed"
+            border: " 1px dashed",
           }}
           multiple={false}
           accept="image/*"
@@ -59,8 +61,11 @@ class ImageUpload extends React.Component {
                 {Object.keys(files).length !== 0 ? (
                   files.map((file, key) => <aside key={key}>{thumbs}</aside>)
                   ) : (
-                  <p className="hello">+ image here to prompt users to click</p>
-                )}
+                  <div>
+                    <Icon type="file-image" />
+                    <p className="hello"> image here to prompt users to click</p>
+                  </div>)
+                }
               </div>
             </section>
           )}

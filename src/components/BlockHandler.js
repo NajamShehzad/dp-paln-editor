@@ -1,7 +1,8 @@
 import React from "react"
 import { sortableHandle } from "react-sortable-hoc"
+import { Icon } from 'antd'
 
-const DragHandle = sortableHandle(() => <span>:</span>);
+const DragHandle = sortableHandle(() => <Icon type="drag" />);
 
 class BlockHandler extends React.Component {
   constructor(props) {
@@ -11,11 +12,11 @@ class BlockHandler extends React.Component {
 		}
 	}
 
-  handleMouseEnter() {
+  handleMouseEnter = () => {
     this.setState({isHovering: true});
   }
 
-  handleMouseLeave() {
+  handleMouseLeave = () => {
     this.setState({isHovering: true});
   }
 
@@ -27,18 +28,18 @@ class BlockHandler extends React.Component {
 					width:'20px',
 					height:'40px'
 				}}
-				onMouseEnter={this.handleMouseEnter.bind(this)}
-				onMouseLeave={this.handleMouseLeave.bind(this)}
+				onMouseEnter={this.handleMouseEnter}
+				onMouseLeave={this.handleMouseLeave}
 			>
 				{this.state.isHovering &&
 					<div>
 						<DragHandle />
-						<button
+						<Icon
+							type="delete"	
+							theme="twoTone"
 							index={this.props.index}
 							onClick={() => this.props.handleDelete(this.props.index)}
-						>
-							*
-						</button>
+						/>
 					</div>
 				}
 			</div>

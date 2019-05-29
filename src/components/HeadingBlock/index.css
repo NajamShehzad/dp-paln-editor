@@ -1,0 +1,25 @@
+textarea {
+	box-sizing: border-box;
+	border: none;
+	border-radius: 3px;
+	resize: none;
+	font-size: 20px;
+	line-height: 24px;
+	overflow: auto;
+	height: auto;
+	padding: 8px;
+	box-shadow: 0px 4px 10px -8px black;
+	float: left;
+}
+
+textarea.ant-input {
+	width: 92%;
+}
+
+textarea::placeholder {
+	color: gainsboro;	
+}
+
+textarea:focus {
+	outline: none;
+}

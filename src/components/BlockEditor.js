@@ -34,7 +34,9 @@ const DragableBlock = sortableElement(({index, type, content, handleDelete, hand
       return (
         <div>
           <HtmlBlock
+            index={index}
             type={type}
+            content={content}
             handleContentChange={handleContentChange}
           />
           <BlockHandler index={index} handleDelete={handleDelete} />
@@ -44,7 +46,12 @@ const DragableBlock = sortableElement(({index, type, content, handleDelete, hand
     case BLOCK_TYPE.IMAGE:
       return (
         <div>
-          <ImageBlock type={type} />
+          <ImageBlock
+            index={index}
+            type={type}
+            content={content}
+            handleContentChange={handleContentChange}
+          />
           <BlockHandler index={index} handleDelete={handleDelete} />
           <PopupMenu index={index} onClickMenu={handleClickMenu} />
         </div>
@@ -92,9 +99,10 @@ class BlockEditor extends React.Component {
   };
 
   render() {
+    console.log(this.state.blocks);
     return (
       <div className="blockEditor">
-        <Input /*className="nameInput"*/ size='small' placeholder='Name' />
+        <Input /*className="nameInput"*/ size='large' placeholder='Name' />
         <PopupMenu index={0} onClickMenu={this.handleClickMenu} />
 
         <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>

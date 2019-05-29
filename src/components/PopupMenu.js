@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import Popup from 'reactjs-popup';
 import BLOCK_TYPE from './BlockType'
+import { Button, Menu, Dropdown, Icon } from 'antd';
+import 'antd/lib/button/style/index.css';
+import 'antd/lib/menu/style/index.css';
+import 'antd/lib/dropdown/style/index.css';
 
 class PopupMenu extends Component {
   constructor(props) {
@@ -8,18 +11,14 @@ class PopupMenu extends Component {
     this.state = {
       isHovering: false,
     };
-
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleClickMenu = this.handleClickMenu.bind(this);
   }
 
-  handleMouseEnter() {
+  handleMouseEnter = () => {
     this.setState({isHovering: true});
     styles.addButton.opacity = 100;
   }
 
-  handleMouseLeave() {
+  handleMouseLeave = () => {
     this.setState({isHovering: false});
     styles.addButton.opacity = 0;
   }
@@ -31,59 +30,55 @@ class PopupMenu extends Component {
   }
 
   render() {
+
+    const menu = (
+      <Menu>
+        <Menu.Item key="0">
+          <div onClick={this.handleClickMenu(BLOCK_TYPE.HEADING)}>Heading</div>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="1">
+          <div onClick={this.handleClickMenu(BLOCK_TYPE.HTML)}>HTML</div>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="3">
+          <div onClick={this.handleClickMenu(BLOCK_TYPE.IMAGE)}>Image</div>
+        </Menu.Item>
+      </Menu>
+    );
+
     return (
-    <div
-      style={{...styles.menu, ...styles.addButton}}
-      onMouseEnter={this.handleMouseEnter}
-      onMouseLeave={this.handleMouseLeave}
-    >
-      {this.state.isHovering &&
-        <Popup 
-          trigger={<button style={{...styles.menuItem, ...styles.addButton}}> + </button>}
-          position="right top"
-          on="click"
-          closeOnDocumentClick
-          contentStyle={{ padding: '0px', border: 'none' }}
-        >
-          <div style={styles.menu}>
-            <div style={styles.menuItem} onClick={this.handleClickMenu(BLOCK_TYPE.HEADING)}> Heading</div>
-            <div style={styles.menuItem} onClick={this.handleClickMenu(BLOCK_TYPE.HTML)}> HTML</div>
-            <div style={styles.menuItem} onClick={this.handleClickMenu(BLOCK_TYPE.IMAGE)}> Image</div>
-          </div>
-        </Popup>
-      }
-    </div>
+      <div
+        style={{...styles.menu, ...styles.addButton}}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+      >
+        {this.state.isHovering &&
+          <Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
+              <Button type="primary" shape="circle" size="large" >
+                {/* <Icon type="plus-circle" size="large" /> */}
+              </Button>
+          </Dropdown>
+        }
+      </div>
     )
   }
 }
 
 const styles = {
-  root: {
-    fontFamily: '\'Georgia\' serif',
-    padding: 20,
-    width: 600,
-  },
-  
   menu: {
-    width: 200,
     display: 'flex',
     flexDirection: 'column',
     background: '#ffffff',
     margin: 'auto',
     marginRight: 'auto',
   },
-  menuItem: {
-    cursor: 'pointer',
-    padding: 5,
-    height: 15,
-    borderBottom: '1px solid rgb(187, 187, 187)',
-  },
-  menuItemhover: {color: '#2980b9'},
   addButton: {
     width: 50,
     height: 50,
     borderRadius: 30,
     opacity: 0,
+    clear: 'both'
   },
 };
 
