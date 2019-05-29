@@ -99,16 +99,17 @@ class BlockEditor extends React.Component {
   };
 
   render() {
-    console.log(this.state.blocks);
+    // console.log(this.state.blocks);
     return (
       <div className="blockEditor">
-        <Input /*className="nameInput"*/ size='large' placeholder='Name' />
+        <Input placeholder='Name' />
         <PopupMenu index={0} onClickMenu={this.handleClickMenu} />
 
         <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>
           {this.state.blocks.map((block, key) => {
             return (
-              <DragableBlock key={key} 
+              <DragableBlock 
+                key={key} 
                 index={key + 1}
                 type={block.type} 
                 content={block.content}

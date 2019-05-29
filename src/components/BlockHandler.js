@@ -1,14 +1,15 @@
 import React from "react"
 import { sortableHandle } from "react-sortable-hoc"
 import { Icon } from 'antd'
+import 'antd/lib/divider/style/index.css'
 
-const DragHandle = sortableHandle(() => <Icon type="drag" />);
+const DragHandle = sortableHandle(() => <Icon type="menu"  style={{display: 'block'}} />);
 
 class BlockHandler extends React.Component {
   constructor(props) {
 		super(props);
 		this.state = {
-			isHovering: true,
+			isHovering: false,
 		}
 	}
 
@@ -17,26 +18,30 @@ class BlockHandler extends React.Component {
   }
 
   handleMouseLeave = () => {
-    this.setState({isHovering: true});
+    this.setState({isHovering: false});
   }
 
   render() {
     return (
 			<div
 				style={{
-					float:'right',
-					width:'20px',
-					height:'40px'
+					float: 'right',
+					fontSize: '16px',
+					width: '16px',
+					height: '70px',
+					borderLeft: '1px solid gray',
+					paddingLeft: '8px',
 				}}
 				onMouseEnter={this.handleMouseEnter}
 				onMouseLeave={this.handleMouseLeave}
 			>
 				{this.state.isHovering &&
-					<div>
+					<div
+						>
 						<DragHandle />
 						<Icon
-							type="delete"	
-							theme="twoTone"
+							type="close"
+							style={{}}
 							index={this.props.index}
 							onClick={() => this.props.handleDelete(this.props.index)}
 						/>

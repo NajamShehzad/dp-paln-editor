@@ -4,9 +4,7 @@
     width: 30%;
 }
 
-.nameInput {
-    width: 100%;
-    height: 30px;
-    font-size: 20px;
-    border-radius: 3px;
+.ant-input {
+    border-color: white white blue white;
+    border-radius: 0;
 }

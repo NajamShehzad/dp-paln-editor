@@ -4,12 +4,12 @@ import { Icon } from 'antd'
 
 // for profile picture
 class ImageUpload extends React.Component {
-  state = { warningMsg: "" };
+  // state = { warningMsg: "" };
 
   onDrop = (accepted, rejected) => {
     if (Object.keys(rejected).length !== 0) {
-      const message = "Please submit valid file type";
-      this.setState({ warningMsg: message });
+      // const message = "Please submit valid file type";
+      // this.setState({ warningMsg: message });
     } else {
       this.props.addFile(accepted);
       this.setState({ warningMsg: "" });
@@ -41,7 +41,7 @@ class ImageUpload extends React.Component {
 
     return (
       <div>
-        <p>{this.state.warningMsg}</p>
+        {/* <p>{this.state.warningMsg}</p> */}
 
         <Dropzone
           style={{
@@ -61,9 +61,8 @@ class ImageUpload extends React.Component {
                 {Object.keys(files).length !== 0 ? (
                   files.map((file, key) => <aside key={key}>{thumbs}</aside>)
                   ) : (
-                  <div>
-                    <Icon type="file-image" />
-                    <p className="hello"> image here to prompt users to click</p>
+                  <div style={{textAlign:'center', backgroundColor:'rgb(243, 243, 243)', outlineColor:'rgb(166, 166, 166)', outlineStyle:'dashed'}}>
+                    <Icon type="cloud-upload" style={{fontSize: '50px', color:'rgb(218, 218, 218)'}} />
                   </div>)
                 }
               </div>

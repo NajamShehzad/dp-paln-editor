@@ -4,19 +4,13 @@ import ImageUpload from './ImageUpload'
 class ImageBlock extends React.Component {
   constructor(props) {
     super(props);
-
     const { content } = props;
-    this.state = {files: content.length !== 0 ? content : []};
-    console.log("files content", this.state.files, content);
-  }
-  componentWillUnmount() {
-    // Make sure to revoke the data uris to avoid memory leaks
-    this.state.files.forEach(file => URL.revokeObjectURL(file.preview));
+    this.state = {files: content.length ? content : []};
   }
 
   componentWillReceiveProps = (props) => {
-    // const { content } = props;
-    // this.setState({files: content.length !== 0 ? content : []});
+    const { content } = props;
+    this.setState({files: content.length ? content : [] });
   }
 
   addFile = file => {
@@ -33,7 +27,7 @@ class ImageBlock extends React.Component {
 
   render() {
     return (
-      <div style={{width:"90%", float:"left"}}>
+      <div style={{width:"90%", float:"left", paddingTop:"5px", paddingBottom:"5px"}}>
         <ImageUpload addFile={this.addFile} files={this.state.files} />
         {/*<FileUpload addFile={this.addFile} files={this.state.files} /> */}
       </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import BLOCK_TYPE from './BlockType'
-import { Button, Menu, Dropdown, Icon } from 'antd';
+import { Menu, Dropdown, Icon } from 'antd';
 import 'antd/lib/button/style/index.css';
 import 'antd/lib/menu/style/index.css';
 import 'antd/lib/dropdown/style/index.css';
@@ -34,15 +34,15 @@ class PopupMenu extends Component {
     const menu = (
       <Menu>
         <Menu.Item key="0">
-          <div onClick={this.handleClickMenu(BLOCK_TYPE.HEADING)}>Heading</div>
+          <span onClick={this.handleClickMenu(BLOCK_TYPE.HEADING)}>Heading</span>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="1">
-          <div onClick={this.handleClickMenu(BLOCK_TYPE.HTML)}>HTML</div>
+          <span onClick={this.handleClickMenu(BLOCK_TYPE.HTML)}>HTML</span>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="3">
-          <div onClick={this.handleClickMenu(BLOCK_TYPE.IMAGE)}>Image</div>
+          <span onClick={this.handleClickMenu(BLOCK_TYPE.IMAGE)}>Image</span>
         </Menu.Item>
       </Menu>
     );
@@ -53,13 +53,13 @@ class PopupMenu extends Component {
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
-        {this.state.isHovering &&
-          <Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
-              <Button type="primary" shape="circle" size="large" >
-                {/* <Icon type="plus-circle" size="large" /> */}
-              </Button>
-          </Dropdown>
-        }
+        <div style={{width:"40px", height:"40px", margin: 'auto'}}>
+          {this.state.isHovering &&
+            <Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
+                <Icon type="plus-circle" theme="twoTone" style={{fontSize: '40px'}} />
+            </Dropdown>
+          }
+        </div>
       </div>
     )
   }
@@ -70,15 +70,16 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     background: '#ffffff',
-    margin: 'auto',
-    marginRight: 'auto',
+    width: '100%',
+    height: 40,
   },
   addButton: {
-    width: 50,
-    height: 50,
     borderRadius: 30,
     opacity: 0,
-    clear: 'both'
+    transition: '0.5s ease',
+    paddingTop: 10,
+    paddingBottom: 10,
+    clear: 'both',
   },
 };
 
