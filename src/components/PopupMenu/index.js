@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import BLOCK_TYPE from './BlockType'
-import { Menu, Dropdown, Icon } from 'antd';
+import BLOCK_TYPE from '../BlockType';
+import { Menu, Dropdown, Button } from 'antd';
 import 'antd/lib/button/style/index.css';
 import 'antd/lib/menu/style/index.css';
 import 'antd/lib/dropdown/style/index.css';
+import './index.css'
 
 class PopupMenu extends Component {
   constructor(props) {
@@ -32,19 +33,11 @@ class PopupMenu extends Component {
   render() {
 
     const menu = (
-      <Menu>
-        <Menu.Item key="0">
-          <span onClick={this.handleClickMenu(BLOCK_TYPE.HEADING)}>Heading</span>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="1">
-          <span onClick={this.handleClickMenu(BLOCK_TYPE.HTML)}>HTML</span>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="3">
-          <span onClick={this.handleClickMenu(BLOCK_TYPE.IMAGE)}>Image</span>
-        </Menu.Item>
-      </Menu>
+        <Menu  style={{ backgroundColor: 'rgb(242, 242, 242)', fontColor: 'rgb(127, 127, 127)'}}>
+          <Menu.Item key="0" onClick={this.handleClickMenu(BLOCK_TYPE.HEADING)} > Heading </Menu.Item>
+          <Menu.Item key="1" onClick={this.handleClickMenu(BLOCK_TYPE.HTML)}> HTML </Menu.Item>
+          <Menu.Item key="2" onClick={this.handleClickMenu(BLOCK_TYPE.IMAGE)}> Image </Menu.Item>
+        </Menu>
     );
 
     return (
@@ -56,7 +49,7 @@ class PopupMenu extends Component {
         <div style={{width:"40px", height:"40px", margin: 'auto'}}>
           {this.state.isHovering &&
             <Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
-                <Icon type="plus-circle" theme="twoTone" style={{fontSize: '40px'}} />
+                <Button type="link" shape="circle" icon="plus" size="large" style={{background: 'rgb(242, 242, 242)', fontSize: '34px', color: 'rgb(191, 191, 191)'}} />
             </Dropdown>
           }
         </div>
@@ -69,7 +62,6 @@ const styles = {
   menu: {
     display: 'flex',
     flexDirection: 'column',
-    background: '#ffffff',
     width: '100%',
     height: 40,
   },

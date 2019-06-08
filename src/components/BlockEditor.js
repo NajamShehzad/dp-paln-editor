@@ -7,12 +7,12 @@ import arrayMove from 'array-move'
 import { Input } from 'antd';
 import 'antd/lib/input/style/index.css';
 
-import BlockHandler from './BlockHandler'
+import BLOCK_TYPE from './BlockType'
 import HeadingBlock from './HeadingBlock/'
 import HtmlBlock from './HtmlBlock/'
 import ImageBlock from './ImageBlock/'
-import BLOCK_TYPE from './BlockType'
-import PopupMenu from './PopupMenu'
+import BlockHandler from './BlockHandler/'
+import PopupMenu from './PopupMenu/'
 import './BlockEditor.css'
 
 const DragableBlock = sortableElement(({index, type, content, handleDelete, handleClickMenu, handleContentChange}) => {

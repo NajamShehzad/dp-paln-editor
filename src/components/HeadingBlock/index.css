@@ -4,9 +4,9 @@ textarea {
 	resize: none;
 	font-size: 17px;
 	overflow: auto;
-	height: auto;
+	width: 90%;
+	height: 70px;
 	float: left;
-	width: 80%;
 }	
 
 textarea:focus {

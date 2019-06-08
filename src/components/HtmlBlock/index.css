@@ -1,11 +1,11 @@
 .RichEditor-root {
     background: #fff;
-    border-width: 1px;
+    border-width: 0px;
     border-style: solid;
 	  border-color: white;
     font-family: 'Georgia', serif;
     font-size: 14px;
-    width: 80%;
+    width: 90%;
     float: left;
   }
   

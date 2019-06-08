@@ -5,6 +5,6 @@
 }
 
 .ant-input {
-    border-color: white white blue white;
+    border-color: white white rgb(191, 191, 191) white;
     border-radius: 0;
 }
