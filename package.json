@@ -14,12 +14,14 @@
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.1.5",
+    "react-gluejar": "^1.0.0",
     "react-nice-inputs": "^1.0.53",
     "react-scripts": "3.0.1",
     "react-sortable-hoc": "^1.9.1",
     "react-tooltip-controller": "^1.0.6",
     "reactjs-popup": "^1.4.1",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "typescript": "^3.5.1"
   },
   "scripts": {
     "start": "react-scripts start",

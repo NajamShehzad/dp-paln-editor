@@ -3,6 +3,8 @@ import {
   sortableContainer,
   sortableElement,
 } from 'react-sortable-hoc'
+// import { Gluejar } from 'react-gluejar'
+
 import arrayMove from 'array-move'
 import { Input } from 'antd';
 import 'antd/lib/input/style/index.css';
@@ -12,10 +14,10 @@ import HeadingBlock from './HeadingBlock/'
 import HtmlBlock from './HtmlBlock/'
 import ImageBlock from './ImageBlock/'
 import BlockHandler from './BlockHandler/'
-import PopupMenu from './PopupMenu/'
+import AddBlockMenu from './AddBlockMenu/'
 import './BlockEditor.css'
 
-const DragableBlock = sortableElement(({index, type, content, handleDelete, handleClickMenu, handleContentChange}) => {
+const DragableBlock = sortableElement(({index, type, content, width, handleDelete, handleWidth, handleClickMenu, handleContentChange}) => {
   switch (type) {
     case BLOCK_TYPE.HEADING:
       return (
@@ -26,8 +28,8 @@ const DragableBlock = sortableElement(({index, type, content, handleDelete, hand
             content={content}
             handleContentChange={handleContentChange}
           />
-          <BlockHandler index={index} handleDelete={handleDelete} />
-          <PopupMenu index={index} onClickMenu={handleClickMenu} />
+          <BlockHandler index={index} type={type} content={content} handleDelete={handleDelete} handleWidth={handleWidth} />
+          <AddBlockMenu index={index} onClickMenu={handleClickMenu} />
         </div>
       )
     case BLOCK_TYPE.HTML:
@@ -39,8 +41,8 @@ const DragableBlock = sortableElement(({index, type, content, handleDelete, hand
             content={content}
             handleContentChange={handleContentChange}
           />
-          <BlockHandler index={index} handleDelete={handleDelete} />
-          <PopupMenu index={index} onClickMenu={handleClickMenu} />
+          <BlockHandler index={index} type={type} content={content} handleDelete={handleDelete} handleWidth={handleWidth} />
+          <AddBlockMenu index={index} onClickMenu={handleClickMenu} />
         </div>
       )
     case BLOCK_TYPE.IMAGE:
@@ -50,10 +52,12 @@ const DragableBlock = sortableElement(({index, type, content, handleDelete, hand
             index={index}
             type={type}
             content={content}
+            width={width}
             handleContentChange={handleContentChange}
           />
-          <BlockHandler index={index} handleDelete={handleDelete} />
-          <PopupMenu index={index} onClickMenu={handleClickMenu} />
+          <BlockHandler index={index} type={type} content={content} handleDelete={handleDelete} handleWidth={handleWidth} />
+          <AddBlockMenu index={index} onClickMenu={handleClickMenu} />
+          
         </div>
       )
     default:
@@ -74,6 +78,7 @@ class BlockEditor extends React.Component {
     };
   }
 
+
   handleContentChange = (index, type, content) => {
     var { blocks } = this.state;
     blocks[index - 1] = { type,  content};
@@ -92,18 +97,25 @@ class BlockEditor extends React.Component {
     this.setState({ blocks: blocks });
   }
 
+  handleWidth = (index, width) => {
+    var { blocks } = this.state;
+    var type = blocks[index - 1].type;
+    var content = blocks[index - 1].content;
+    blocks[index - 1] = {type, content, width: width};
+    this.setState({ blocks: blocks });
+  }
+
   onSortEnd = ({oldIndex, newIndex}) => {
-    this.setState(({blocks}) => ({
+    this.setState(({blocks}) => ({  
       blocks: arrayMove(blocks, oldIndex - 1, newIndex - 1),
     }));
   };
 
   render() {
-    // console.log(this.state.blocks);
     return (
       <div className="blockEditor">
         <Input placeholder='Name' />
-        <PopupMenu index={0} onClickMenu={this.handleClickMenu} />
+        <AddBlockMenu index={0} onClickMenu={this.handleClickMenu} />
 
         <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>
           {this.state.blocks.map((block, key) => {
@@ -113,13 +125,22 @@ class BlockEditor extends React.Component {
                 index={key + 1}
                 type={block.type} 
                 content={block.content}
+                width={block.width}
                 handleDelete={this.handleDelete}
+                handleWidth={this.handleWidth}
                 handleClickMenu={this.handleClickMenu}
                 handleContentChange={this.handleContentChange}
               />
             )})
           }
         </SortableContainer>
+{/*         
+        <Gluejar onPaste={files => console.log(files)} errorHandler={err => console.error(err)}>
+          {images =>
+            images.length > 0 &&
+            images.map(image => <img src={image} key={image} alt={`Pasted: ${image}`} />)
+          }
+        </Gluejar> */}
       </div>
     );
   }

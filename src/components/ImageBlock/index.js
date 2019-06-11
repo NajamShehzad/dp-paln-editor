@@ -28,7 +28,7 @@ class ImageBlock extends React.Component {
   render() {
     return (
       <div style={{width:"90%", float:"left", paddingTop:"5px", paddingBottom:"5px"}}>
-        <ImageUpload addFile={this.addFile} files={this.state.files} />
+        <ImageUpload addFile={this.addFile} files={this.state.files} width={this.props.width} />
         {/*<FileUpload addFile={this.addFile} files={this.state.files} /> */}
       </div>
     );

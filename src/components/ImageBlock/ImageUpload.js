@@ -28,9 +28,10 @@ class ImageUpload extends React.Component {
   };
 
   render() {
-    const { files } = this.props;
+
+    const { files, width } = this.props;
     const thumbsContainer = {
-      width: "100%",
+      width: width == null ? '100%' : width,
       objectPosition: "center",
       alignItem: "center",
     };

@@ -4,9 +4,8 @@ import { Menu, Dropdown, Button } from 'antd';
 import 'antd/lib/button/style/index.css';
 import 'antd/lib/menu/style/index.css';
 import 'antd/lib/dropdown/style/index.css';
-import './index.css'
 
-class PopupMenu extends Component {
+class AddBlockMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +32,7 @@ class PopupMenu extends Component {
   render() {
 
     const menu = (
-        <Menu  style={{ backgroundColor: 'rgb(242, 242, 242)', fontColor: 'rgb(127, 127, 127)'}}>
+        <Menu  style={{ backgroundColor: 'rgb(242, 242, 242)', fontColor: 'rgb(127, 127, 127)', marginLeft: '100px'}}>
           <Menu.Item key="0" onClick={this.handleClickMenu(BLOCK_TYPE.HEADING)} > Heading </Menu.Item>
           <Menu.Item key="1" onClick={this.handleClickMenu(BLOCK_TYPE.HTML)}> HTML </Menu.Item>
           <Menu.Item key="2" onClick={this.handleClickMenu(BLOCK_TYPE.IMAGE)}> Image </Menu.Item>
@@ -75,4 +74,4 @@ const styles = {
   },
 };
 
-export default PopupMenu;
+export default AddBlockMenu;
