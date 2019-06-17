@@ -46,6 +46,7 @@ const DragableBlock = sortableElement(({index, type, content, width, handleDelet
         </div>
       )
     case BLOCK_TYPE.IMAGE:
+      console.log("Content is here ===>",content)
       return (
         <div>
           <ImageBlock
