@@ -36,9 +36,13 @@ class ImageUpload extends React.Component {
       alignItem: "center",
     };
 
-    const thumbs = files.map((file, key) => (
-      <img key={key} style={thumbsContainer} src={file.preview} alt="profile" />
-    ));
+    const thumbs = files.map((file, key) => {
+      console.log(file,key);
+      
+      return (
+        <img key={key} style={thumbsContainer} src={file.preview} alt="profile" />
+      )
+    });
 
     return (
       <div>
@@ -55,16 +59,16 @@ class ImageUpload extends React.Component {
           accept="image/*"
           onDrop={(accepted, rejected) => this.onDrop(accepted, rejected)}
         >
-          {({getRootProps, getInputProps}) => (
+          {({ getRootProps, getInputProps }) => (
             <section>
-              <div {...getRootProps({className: 'dropzone'})}>
+              <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
                 {Object.keys(files).length !== 0 ? (
                   files.map((file, key) => <aside key={key}>{thumbs}</aside>)
-                  ) : (
-                  <div style={{textAlign:'center', backgroundColor:'rgb(243, 243, 243)', outlineColor:'rgb(166, 166, 166)', outlineStyle:'dashed'}}>
-                    <Icon type="cloud-upload" style={{fontSize: '50px', color:'rgb(218, 218, 218)'}} />
-                  </div>)
+                ) : (
+                    <div style={{ textAlign: 'center', backgroundColor: 'rgb(243, 243, 243)', outlineColor: 'rgb(166, 166, 166)', outlineStyle: 'dashed' }}>
+                      <Icon type="cloud-upload" style={{ fontSize: '50px', color: 'rgb(218, 218, 218)' }} />
+                    </div>)
                 }
               </div>
             </section>
