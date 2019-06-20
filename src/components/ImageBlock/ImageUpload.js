@@ -40,7 +40,7 @@ class ImageUpload extends React.Component {
       console.log(file,key);
       
       return (
-        <img key={key} style={thumbsContainer} src={file.preview} alt="profile" />
+        <img key={key} style={thumbsContainer} src={URL.createObjectURL(file)} alt="profile" />
       )
     });
 
