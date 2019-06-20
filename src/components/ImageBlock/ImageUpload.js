@@ -8,8 +8,6 @@ class ImageUpload extends React.Component {
 
   onDrop = (accepted, rejected) => {
     if (Object.keys(rejected).length !== 0) {
-      // const message = "Please submit valid file type";
-      // this.setState({ warningMsg: message });
     } else {
       this.props.addFile(accepted);
       this.setState({ warningMsg: "" });
@@ -37,8 +35,8 @@ class ImageUpload extends React.Component {
     };
 
     const thumbs = files.map((file, key) => {
-      console.log(file,key);
-      
+      console.log("From File Content her ===>>>", file, key);
+
       return (
         <img key={key} style={thumbsContainer} src={URL.createObjectURL(file)} alt="profile" />
       )

@@ -23,7 +23,7 @@ stories.add('Image Block', () => {
         console.log("File From Data URL", data);
         let newFIle = blobToFile(data, "myFile")
         var file = new File([newFIle], "name");
-        console.log(file)
+        console.log("From StoryBook", file)
         value = [file];
     }
     console.log(value)

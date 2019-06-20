@@ -10,6 +10,7 @@ class HeadingBlock extends React.Component {
 	};
 
   render() {
+    console.log(this.props);
 		const { content } = this.props;
     return (
       <textarea
