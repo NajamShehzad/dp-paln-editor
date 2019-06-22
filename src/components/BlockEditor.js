@@ -16,8 +16,9 @@ import ImageBlock from './ImageBlock/'
 import BlockHandler from './BlockHandler/'
 import AddBlockMenu from './AddBlockMenu/'
 import './BlockEditor.css'
+import RichTextHtml from './RichTextHtml';
 
-const DragableBlock = sortableElement(({index, type, content, width, handleDelete, handleWidth, handleClickMenu, handleContentChange}) => {
+const DragableBlock = sortableElement(({ index, type, content, width, handleDelete, handleWidth, handleClickMenu, handleContentChange }) => {
   switch (type) {
     case BLOCK_TYPE.HEADING:
       return (
@@ -35,18 +36,24 @@ const DragableBlock = sortableElement(({index, type, content, width, handleDelet
     case BLOCK_TYPE.HTML:
       return (
         <div>
-          <HtmlBlock
+          <RichTextHtml
             index={index}
             type={type}
             content={content}
             handleContentChange={handleContentChange}
           />
+          {/* <HtmlBlock
+            index={index}
+            type={type}
+            content={content}
+            handleContentChange={handleContentChange}
+          /> */}
           <BlockHandler index={index} type={type} content={content} handleDelete={handleDelete} handleWidth={handleWidth} />
           <AddBlockMenu index={index} onClickMenu={handleClickMenu} />
         </div>
       )
     case BLOCK_TYPE.IMAGE:
-      console.log("Content is here ===>",content)
+      console.log("Content is here ===>", content)
       return (
         <div>
           <ImageBlock
@@ -58,7 +65,7 @@ const DragableBlock = sortableElement(({index, type, content, width, handleDelet
           />
           <BlockHandler index={index} type={type} content={content} handleDelete={handleDelete} handleWidth={handleWidth} />
           <AddBlockMenu index={index} onClickMenu={handleClickMenu} />
-          
+
         </div>
       )
     default:
@@ -66,7 +73,7 @@ const DragableBlock = sortableElement(({index, type, content, width, handleDelet
   }
 });
 
-const SortableContainer = sortableContainer(({children}) => {
+const SortableContainer = sortableContainer(({ children }) => {
   return <div> {children} </div>;
 });
 
@@ -82,7 +89,7 @@ class BlockEditor extends React.Component {
 
   handleContentChange = (index, type, content) => {
     var { blocks } = this.state;
-    blocks[index - 1] = { type,  content};
+    blocks[index - 1] = { type, content };
     this.setState({ blocks: blocks });
   }
 
@@ -102,12 +109,12 @@ class BlockEditor extends React.Component {
     var { blocks } = this.state;
     var type = blocks[index - 1].type;
     var content = blocks[index - 1].content;
-    blocks[index - 1] = {type, content, width: width};
+    blocks[index - 1] = { type, content, width: width };
     this.setState({ blocks: blocks });
   }
 
-  onSortEnd = ({oldIndex, newIndex}) => {
-    this.setState(({blocks}) => ({  
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.setState(({ blocks }) => ({
       blocks: arrayMove(blocks, oldIndex - 1, newIndex - 1),
     }));
   };
@@ -121,10 +128,10 @@ class BlockEditor extends React.Component {
         <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>
           {this.state.blocks.map((block, key) => {
             return (
-              <DragableBlock 
-                key={key} 
+              <DragableBlock
+                key={key}
                 index={key + 1}
-                type={block.type} 
+                type={block.type}
                 content={block.content}
                 width={block.width}
                 handleDelete={this.handleDelete}
@@ -132,10 +139,11 @@ class BlockEditor extends React.Component {
                 handleClickMenu={this.handleClickMenu}
                 handleContentChange={this.handleContentChange}
               />
-            )})
+            )
+          })
           }
         </SortableContainer>
-{/*         
+        {/*         
         <Gluejar onPaste={files => console.log(files)} errorHandler={err => console.error(err)}>
           {images =>
             images.length > 0 &&
