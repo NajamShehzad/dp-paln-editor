@@ -21,6 +21,7 @@ class ImageUpload extends React.Component {
         };
       });
       blobPromise.then(value => {
+        console.log("This is  value of Blob ===>",value)
       });
     }
   };

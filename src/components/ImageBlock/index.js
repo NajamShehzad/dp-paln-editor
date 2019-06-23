@@ -19,11 +19,7 @@ class ImageBlock extends React.Component {
     console.log("These are all files  ==>",this.state.files)
     console.log("This is file",file)
     this.setState({
-      files: file.map(file =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file)
-        })
-      )
+      files: file
     });
     const { index, type } = this.props;
     this.props.handleContentChange(index, type, this.state.files);

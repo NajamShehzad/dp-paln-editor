@@ -1,7 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import HtmlBlock from '../../src/components/HtmlBlock';
+import RichTextHtml from '../../src/components/RichTextHtml';
 
 const stories = storiesOf('All Components', module);
 
@@ -10,6 +12,8 @@ const stories = storiesOf('All Components', module);
 stories.addDecorator(withKnobs);
 
 // Knobs for React props
-stories.add('Html Block', () => (
-    <HtmlBlock  content="" />
-));
+stories.add('Html Block', () => {
+    return (
+        <RichTextHtml handleContentChange={action('RichTextEditorChangeAction')} content="" />
+    )
+});

@@ -19,6 +19,7 @@ class RichTextHtml extends Component {
     onChange = (content) => {
         const { index, type, handleContentChange } = this.props
         // this.setState({ content })
+        console.log(content.toString('html'))
         handleContentChange(index, type, content)
     }
 
