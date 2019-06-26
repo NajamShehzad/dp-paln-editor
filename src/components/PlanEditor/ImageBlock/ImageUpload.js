@@ -7,7 +7,7 @@ class ImageUpload extends React.Component {
   // state = { warningMsg: "" };
 
   onDrop = (accepted, rejected) => {
-    console.log("File Here ===>",accepted[0]);
+    // console.log("File Here ===>",accepted[0]);
     if (Object.keys(rejected).length !== 0) {
     } else {
       this.props.addFile(accepted[0]);
@@ -30,7 +30,7 @@ class ImageUpload extends React.Component {
   render() {
 
     const { file, width } = this.props;
-    console.log("File from image Component===>", file);
+    // console.log("File from image Component===>", file);
     const thumbsContainer = {
       width: width == null ? '100%' : width,
       objectPosition: "center",
@@ -64,7 +64,7 @@ class ImageUpload extends React.Component {
             <section>
               <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
-                {(file && file.name) || typeof file == 'string'  ? (
+                {(file && file.name) || (typeof file == 'string' && file.length > 0)  ? (
                   // files.map((file, key) => 
                   <aside><img style={thumbsContainer} src={file && file.name ? URL.createObjectURL(file) : file} alt="profile" /></aside>
                   // )

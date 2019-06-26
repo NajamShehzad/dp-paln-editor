@@ -125,11 +125,18 @@ class PlanEditor extends React.Component {
   onSave = () => {
     console.log("Save Click ==>", this.state)
     const { blocks } = this.state;
-    blocks.map(singleData => {
+   let finalData =  blocks.map(singleData => {
+     console.log("Single Data ==>",singleData);
+     
       if (singleData.type == "HTML") {
-        console.log("ContentHere ====>>>", singleData.content.toString('html'));
+        // console.log("ContentHere ====>>>", singleData.content.toString('html'));
+        return {...singleData,content:singleData.content.toString('html')}
+      }else{
+        return singleData;
       }
     })
+    console.log("Final Data to Save ==>",finalData);
+    
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
