@@ -2,8 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import HtmlBlock from '../../src/components/HtmlBlock';
-import RichTextHtml from '../../src/components/RichTextHtml';
+import HtmlBlock from '../../src/components/PlanEditor/HtmlBlock';
+import RichTextHtml from '../../src/components/PlanEditor/RichTextHtml';
 
 const stories = storiesOf('All Components', module);
 

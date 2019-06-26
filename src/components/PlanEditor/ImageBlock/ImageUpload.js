@@ -7,9 +7,10 @@ class ImageUpload extends React.Component {
   // state = { warningMsg: "" };
 
   onDrop = (accepted, rejected) => {
+    console.log("File Here ===>",accepted[0]);
     if (Object.keys(rejected).length !== 0) {
     } else {
-      this.props.addFile(accepted);
+      this.props.addFile(accepted[0]);
       this.setState({ warningMsg: "" });
 
       var blobPromise = new Promise((resolve, reject) => {
@@ -21,28 +22,28 @@ class ImageUpload extends React.Component {
         };
       });
       blobPromise.then(value => {
-        console.log("This is  value of Blob ===>", value)
+        // console.log("This is  value of Blob ===>", value)
       });
     }
   };
 
   render() {
 
-    const { files, width } = this.props;
-    console.log("THi sis files ===>", files);
+    const { file, width } = this.props;
+    console.log("File from image Component===>", file);
     const thumbsContainer = {
       width: width == null ? '100%' : width,
       objectPosition: "center",
       alignItem: "center",
     };
 
-    const thumbs = files.map((file, key) => {
-      console.log("From File Content her ===>>>", file, key);
+    // const thumbs = files.map((file, key) => {
+    //   console.log("From File Content her ===>>>", file, key);
 
-      return (
-        <img key={key} style={thumbsContainer} src={URL.createObjectURL(file)} alt="profile" />
-      )
-    });
+    //   return (
+    //     <img key={key} style={thumbsContainer} src={URL.createObjectURL(file)} alt="profile" />
+    //   )
+    // });
 
     return (
       <div>
@@ -63,12 +64,15 @@ class ImageUpload extends React.Component {
             <section>
               <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
-                {Object.keys(files).length !== 0 ? (
-                  files.map((file, key) => <aside key={key}>{thumbs}</aside>)
+                {(file && file.name) || typeof file == 'string'  ? (
+                  // files.map((file, key) => 
+                  <aside><img style={thumbsContainer} src={file && file.name ? URL.createObjectURL(file) : file} alt="profile" /></aside>
+                  // )
                 ) : (
                     <div style={{ textAlign: 'center', backgroundColor: 'rgb(243, 243, 243)', outlineColor: 'rgb(166, 166, 166)', outlineStyle: 'dashed' }}>
                       <Icon type="cloud-upload" style={{ fontSize: '50px', color: 'rgb(218, 218, 218)' }} />
-                    </div>)
+                    </div>
+                    )
                 }
               </div>
             </section>

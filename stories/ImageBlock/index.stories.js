@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, boolean, number, files } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions'
-import ImageBlock from '../../src/components/ImageBlock';
+import ImageBlock from '../../src/components/PlanEditor/ImageBlock';
 
 const stories = storiesOf('All Components', module);
 
@@ -24,11 +24,11 @@ stories.add('Image Block', () => {
         let newFIle = blobToFile(data, "myFile")
         var file = new File([newFIle], "name");
         console.log("From StoryBook", file)
-        value = [file];
+        value = file;
     }
-    console.log(value)
+    console.log("Final; Image +++>",value)
     return (
-        <ImageBlock content={value} />
+        <ImageBlock content={'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'} />
     )
 });
 
