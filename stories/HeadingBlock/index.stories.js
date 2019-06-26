@@ -19,7 +19,9 @@ stories.add('Heading Block', () => {
     };
     const groupId = 'GROUP-ID1';
 
-    const newValue = object(label, defaultValue);
+    let newArray1 = [defaultValue,defaultValue]
+
+    const newValue = object("Cheinking Array", newArray1);
 
     const array123 = array("array123", ["najam", newValue])
 

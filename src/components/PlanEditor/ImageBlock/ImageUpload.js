@@ -21,7 +21,7 @@ class ImageUpload extends React.Component {
         };
       });
       blobPromise.then(value => {
-        console.log("This is  value of Blob ===>",value)
+        console.log("This is  value of Blob ===>", value)
       });
     }
   };
@@ -29,6 +29,7 @@ class ImageUpload extends React.Component {
   render() {
 
     const { files, width } = this.props;
+    console.log("THi sis files ===>", files);
     const thumbsContainer = {
       width: width == null ? '100%' : width,
       objectPosition: "center",

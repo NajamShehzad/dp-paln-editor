@@ -3,10 +3,11 @@ import {
   sortableContainer,
   sortableElement,
 } from 'react-sortable-hoc'
+import RichTextEditor from 'react-rte'
 // import { Gluejar } from 'react-gluejar'
 
 import arrayMove from 'array-move'
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 import 'antd/lib/input/style/index.css';
 
 import BLOCK_TYPE from './BlockType'
@@ -77,12 +78,20 @@ const SortableContainer = sortableContainer(({ children }) => {
   return <div> {children} </div>;
 });
 
-class BlockEditor extends React.Component {
+class PlanEditor extends React.Component {
   constructor(props) {
     super(props);
+    const { blocks } = this.props
+    let recivedBlock = [{ type: "HTML", content: "<div><h1>Najam Shehzad Butt </h1></div>" }]
+    let finalArrayToState = recivedBlock.map(data=>{
+      if (data.type == "HTML") {
+        console.log("ContentHere ====>>>", data.content.toString('html'));
+        return {...data,content:RichTextEditor.createValueFromString(data.content,'html')}
+      }
+    })
     this.state = {
       name: '',
-      blocks: [],
+      blocks: finalArrayToState ? finalArrayToState : [],
     };
   }
 
@@ -111,6 +120,16 @@ class BlockEditor extends React.Component {
     var content = blocks[index - 1].content;
     blocks[index - 1] = { type, content, width: width };
     this.setState({ blocks: blocks });
+  }
+
+  onSave = () => {
+    console.log("Save Click ==>", this.state)
+    const { blocks } = this.state;
+    blocks.map(singleData => {
+      if (singleData.type == "HTML") {
+        console.log("ContentHere ====>>>", singleData.content.toString('html'));
+      }
+    })
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
@@ -143,16 +162,10 @@ class BlockEditor extends React.Component {
           })
           }
         </SortableContainer>
-        {/*         
-        <Gluejar onPaste={files => console.log(files)} errorHandler={err => console.error(err)}>
-          {images =>
-            images.length > 0 &&
-            images.map(image => <img src={image} key={image} alt={`Pasted: ${image}`} />)
-          }
-        </Gluejar> */}
+        <Button onClick={this.onSave} >Save Curent Plan</Button>
       </div>
     );
   }
 }
 
-export default BlockEditor;
+export default PlanEditor;
